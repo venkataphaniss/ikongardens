@@ -1,0 +1,240 @@
+/* =========================================================
+   IKON GARDENS — style.css
+   1. Tokens  2. Base  3. Nav  4. Hero  5. Sections
+   6. Gallery  7. Contact  8. Footer  9. Light theme + logos
+   10. Responsive
+   ========================================================= */
+
+/* 1. TOKENS ------------------------------------------------ */
+:root{
+  --bg:#000; --card:#000; --ink:#fff; --gold:#D4AF37; --head:#D4AF37;
+  --line:rgba(212,175,55,.45); --nav-bg:#000; --map-bg:#000;
+}
+/* Light theme: pure white menu + footer, deep rich gold (readable, not pale) */
+:root[data-theme="light"]{
+  --bg:#F7F7F5; --card:#fff; --ink:#1a1a1a; --gold:#A87B00; --head:#946B00;
+  --line:rgba(168,123,0,.6); --nav-bg:#fff;
+}
+
+/* 2. BASE -------------------------------------------------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:hidden}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;overflow-x:hidden}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--head);line-height:1.1}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+section{padding:clamp(80px,11vw,150px) 6vw;border-top:1px solid var(--line);background:var(--bg)}
+.w{max-width:1160px;margin:auto}
+h2.t{font-size:clamp(2.3rem,5vw,3.8rem);font-weight:400;margin-bottom:28px}
+.eyebrow{font-size:.73rem;letter-spacing:.24em;color:var(--gold);font-weight:700;margin-bottom:22px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+.btn{display:inline-block;text-decoration:none;padding:16px 35px;border:1px solid var(--gold);color:var(--gold);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;transition:.4s}
+.btn:hover{background:var(--gold);color:#000}
+.text-link{display:inline-block;margin-top:14px;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:5px}
+
+/* 3. NAV --------------------------------------------------- */
+nav{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+  padding:16px 5vw;padding-top:calc(16px + env(safe-area-inset-top,0px));
+  background:var(--nav-bg);border-bottom:1px solid var(--gold);transition:padding .5s}
+nav.s{padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:8px}
+.brand img{height:65px;width:auto;max-width:155px;object-fit:contain;transition:height .5s}
+nav.s .brand img{height:54px}
+nav ul{display:flex;align-items:center;gap:clamp(14px,2.4vw,38px);list-style:none;margin-left:auto}
+nav ul a{color:var(--gold);text-decoration:none;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:6px 0}
+nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .4s}
+nav ul a:hover::after{width:100%}
+.theme-toggle{width:28px;height:28px;margin-left:clamp(10px,2vw,24px);border:0;border-radius:50%;background:transparent;color:var(--gold);font-size:16px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+#tg{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
+#tg i,#tg i::before,#tg i::after{position:absolute;left:11px;width:22px;height:1.5px;background:var(--gold);transition:.4s}
+#tg i{top:21px}
+#tg i::before,#tg i::after{content:"";left:0}
+#tg i::before{top:-7px}#tg i::after{top:7px}
+#tg[aria-expanded=true] i{background:transparent}
+#tg[aria-expanded=true] i::before{top:0;transform:rotate(45deg)}
+#tg[aria-expanded=true] i::after{top:0;transform:rotate(-45deg)}
+
+/* 4. HERO — background video lives in .hero-bg-video */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:#000;color:#fff;border-top:0}
+.hero-media{position:absolute;inset:0;z-index:0;background:#000}
+.hero-bg-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.5) 50%,rgba(0,0,0,.2) 100%)}
+.hero-in{position:relative;z-index:2;max-width:1050px;padding:135px 6vw 75px}
+
+.hero-brand-logo{width:clamp(270px,48vw,570px);max-height:53vh;height:auto;object-fit:contain;object-position:left center;margin-bottom:16px}
+
+.hero-welcome{color:#D4AF37;font-size:clamp(.95rem,1.7vw,1.3rem);letter-spacing:.015em;margin-bottom:14px;text-shadow:0 2px 6px rgba(0,0,0,.8)}
+.hero h2{color:#D4AF37;font-size:clamp(1.7rem,3.8vw,3.1rem);font-style:italic;font-weight:400;line-height:1.15;margin-bottom:19px;text-shadow:0 2px 6px rgba(0,0,0,.8)}
+.hero p{color:#fff;font-size:clamp(.95rem,1.65vw,1.2rem);max-width:650px;line-height:1.7;margin-bottom:38px;text-shadow:0 2px 6px rgba(0,0,0,.7)}
+.hero .btn{color:#D4AF37;border-color:#D4AF37}
+.hero .btn:hover{background:#D4AF37;color:#000}
+
+/* Hero phone / WhatsApp row */
+.hero-contact{display:flex;align-items:center;gap:12px;margin-bottom:26px;text-shadow:0 2px 6px rgba(0,0,0,.7)}
+.hc-icon{width:38px;height:38px;border:1px solid #D4AF37;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:.4s}
+.hc-icon svg{width:18px;height:18px;fill:#D4AF37;transition:.4s}
+.hc-icon:hover{background:#D4AF37}
+.hc-icon:hover svg{fill:#000}
+.hc-number{color:#fff;text-decoration:none;font-size:clamp(1.2rem,2vw,1.5rem);letter-spacing:.08em}
+.hc-number:hover{color:#D4AF37}
+
+.hero-in>*{opacity:0;transform:translateY(22px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-in>:nth-child(3){animation-delay:.15s}.hero-in>:nth-child(4){animation-delay:.3s}
+.hero-in>:nth-child(5){animation-delay:.45s}.hero-in>:nth-child(6){animation-delay:.6s}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* 5. ABOUT / SERVICES / EXTRAS ----------------------------- */
+/* About: narrower photo column, wider text column so lines run longer */
+.about-layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(30px,5vw,70px);align-items:center}
+.about-visual{position:relative}
+.about-venue-photo{width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line)}
+.visual-tag{position:absolute;bottom:20px;right:-20px;background:var(--gold);color:#000;padding:15px 20px;font-family:'Cormorant Garamond',serif;font-size:1.35rem}
+.about-copy{width:100%;max-width:none}
+.about-copy p{
+  margin-bottom:17px;line-height:1.85;
+  text-align:justify;          /* every line fills the full width */
+  text-justify:inter-word;
+  hyphens:auto;                /* avoids big gaps between words (needs lang="en" on <html>) */
+  -webkit-hyphens:auto;
+  text-wrap:pretty;            /* avoids lonely last-line words */
+}
+.about-copy p:last-child{margin-bottom:0}
+
+.section-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.section-top p,.gallery-intro,.extras-intro{max-width:670px;opacity:.8}
+.carousel-controls{display:flex;gap:10px;flex-shrink:0}
+.carousel-controls button{width:45px;height:45px;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:50%;cursor:pointer;font-size:1.35rem}
+.carousel-controls button:hover{background:var(--gold);color:#000}
+.events-carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:36px 2px 18px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.event-card{flex:0 0 clamp(240px,29vw,350px);scroll-snap-align:start;border:1px solid var(--line);background:var(--card);overflow:hidden}
+
+/* Service images */
+.event-image{height:300px;background:linear-gradient(140deg,#302715,#0c0c0c);position:relative;overflow:hidden}
+.event-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.event-card:hover .event-image img{transform:scale(1.06)}
+.event-image::after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.65));pointer-events:none}
+.event-image b{position:absolute;z-index:1;left:20px;bottom:16px;font:italic 3rem 'Cormorant Garamond',serif;color:rgba(212,175,55,.85)}
+
+.event-info{padding:24px}
+.event-info h3{font-size:1.8rem;margin-bottom:8px}
+.event-info p{font-size:.9rem;opacity:.8}
+.carousel-hint{text-align:right;color:var(--gold);font-size:.75rem;margin-top:10px}
+
+.extras-intro{margin-bottom:40px}
+.extras-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.extras-grid article{border:1px solid var(--line);background:var(--card);padding:30px;min-height:205px}
+.extras-grid span{color:var(--gold);font-size:.8rem}
+.extras-grid h3{font-size:1.65rem;margin:15px 0 10px}
+.extras-grid p{font-size:.9rem;opacity:.85}
+.service-note{font-size:.75rem;opacity:.7;margin-top:20px}
+
+/* 6. GALLERY ----------------------------------------------- */
+.gallery-film{width:100%;max-width:1000px;margin:38px auto 0;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:#000;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+.gallery-video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#000}
+.gallery-video-link{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1000px;margin:0 auto;padding:18px 0 28px;font-size:.95rem}
+.gallery-video-link a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;font-weight:600}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.gallery-tile{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);background:#111;text-decoration:none}
+.gallery-tile img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.gallery-tile:hover img{transform:scale(1.055)}
+.gallery-tile::after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.7));pointer-events:none}
+.gallery-tile span{position:absolute;z-index:1;bottom:15px;left:17px;right:10px;font-size:.82rem;letter-spacing:.04em;color:#fff;text-shadow:0 1px 4px #000}
+
+/* 7. CONTACT ----------------------------------------------- */
+.ct .w{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,7vw,100px)}
+.ct h3{font-size:1.5rem;margin:28px 0 6px}
+.ct h2+h3{margin-top:0}
+.ct address{font-style:normal}
+.ct a.em{color:var(--head);border-bottom:1px solid var(--gold);text-decoration:none;word-break:break-all}
+.wa{display:inline-flex;align-items:center;gap:12px;margin-top:34px;padding:14px 28px;background:#000;color:#fff;border:1px solid #D4AF37;text-decoration:none;font-size:.9rem;transition:.4s}
+.wa:hover{background:transparent;color:#D4AF37}
+.wa svg{width:20px;fill:#D4AF37}
+.wa small{display:block;opacity:.8;font-size:.78rem}
+.map{background:#000;color:#fff;border:1px solid var(--gold);padding:clamp(34px,5vw,56px);display:flex;flex-direction:column;justify-content:space-between;min-height:380px;position:relative;overflow:hidden}
+.map::before{content:"";position:absolute;inset:0;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 46px,#D4AF37 46px 47px),repeating-linear-gradient(90deg,transparent 0 46px,#D4AF37 46px 47px)}
+.map>*{position:relative}
+.map h3{color:#D4AF37;font-size:2.2rem;margin-bottom:12px}
+.map p{color:#fff;max-width:34ch}
+.map svg{width:30px;stroke:#D4AF37;fill:none;stroke-width:1.2;margin-bottom:22px}
+.map .btn{align-self:flex-start;margin-top:30px}
+
+/* 8. FOOTER ------------------------------------------------ */
+footer{background:var(--nav-bg);border-top:1px solid var(--gold);padding:70px 6vw calc(36px + env(safe-area-inset-bottom,0px));text-align:center}
+footer img{width:clamp(190px,27vw,290px);max-height:260px;height:auto;object-fit:contain;margin:0 auto 18px}
+footer .tg{font:italic 1.3rem 'Cormorant Garamond',serif;color:var(--gold);margin-bottom:30px}
+footer ul{list-style:none;display:flex;gap:10px 30px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+footer a{color:var(--gold);text-decoration:none;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+footer a:hover{text-decoration:underline}
+footer small{display:block;border-top:1px solid var(--gold);padding-top:24px;font-size:.78rem;color:var(--gold);opacity:.9}
+
+/* 9. LOGOS + LIGHT THEME ------------------------------------ */
+/* Menu bar + footer logos keep their black background box in every
+   theme, so only the bar behind them turns white in light mode.
+   The big hero logo has no box. */
+.brand img,
+footer img{
+  background:#000;
+  filter:none;
+  mix-blend-mode:normal;
+}
+/* Hero logo: NO black box, shown directly on the video */
+.hero-brand-logo{background:none;padding:0;filter:none}
+.brand img{padding:3px 7px;border-radius:2px}
+footer img{padding:clamp(10px,1.6vw,18px)}
+
+:root[data-theme="light"] nav,
+:root[data-theme="light"] footer{background:#fff}
+
+/* Light theme: stronger, clearer gold text */
+:root[data-theme="light"] nav ul a,
+:root[data-theme="light"] footer a,
+:root[data-theme="light"] .eyebrow,
+:root[data-theme="light"] .text-link,
+:root[data-theme="light"] .carousel-hint{font-weight:700}
+:root[data-theme="light"] footer small,
+:root[data-theme="light"] footer .tg{opacity:1;font-weight:600}
+:root[data-theme="light"] .btn:hover{color:#fff}
+:root[data-theme="light"] .hero .btn:hover{color:#000}
+
+/* 10. RESPONSIVE ------------------------------------------- */
+@media(max-width:850px){
+  .about-layout{grid-template-columns:1fr}
+  .about-visual{max-width:560px}
+  .about-venue-photo{aspect-ratio:5/4}
+  .about-copy p{text-align:left;hyphens:none;-webkit-hyphens:none} /* justify looks poor on narrow screens */
+  .extras-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  #tg{display:block;margin-left:auto}
+  .brand img{height:52px;max-width:115px}
+  nav.s .brand img{height:46px}
+  nav ul{position:fixed;inset:0;height:100vh;background:var(--nav-bg);flex-direction:column;justify-content:center;gap:30px;opacity:0;pointer-events:none;transition:opacity .5s;z-index:-1;margin:0}
+  nav ul.o{opacity:1;pointer-events:auto}
+  nav ul a{font-size:1.1rem}
+  .theme-toggle{margin-left:6px}
+  .ct .w{grid-template-columns:1fr}
+  .hero-brand-logo{width:min(82vw,420px);max-height:44vh}
+}
+@media(max-width:600px){
+  .hero-in{padding:120px 6vw 70px}
+  .visual-tag{right:0}
+  .section-top{align-items:flex-start}
+  .event-card{flex-basis:82vw}
+  .event-image{height:265px}
+  .extras-grid{grid-template-columns:1fr}
+  .carousel-controls button{width:38px;height:38px}
+}
+@media(max-width:520px){
+  .gallery-grid{grid-template-columns:1fr;gap:12px}
+  .gallery-tile{aspect-ratio:16/10}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv,.hero-in>*{opacity:1;transform:none}
+  html,.events-carousel{scroll-behavior:auto}
+}
